@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "TaskHub.Modules.Tasks.API": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:60639;http://localhost:60640"
+    }
+  }
+}
