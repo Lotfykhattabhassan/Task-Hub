@@ -1,10 +1,16 @@
-using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
+using System.Text;
+using TaskHub.Host;
 using TaskHub.Modules.Identity.Application.DependencyInjection;
 using TaskHub.Modules.Identity.Infrastructure.Configuration;
 using TaskHub.Modules.Identity.Infrastructure.DependencyInjection;
+using TaskHub.Modules.Tenancy.Infrastructure.MultiTenancy;
+using TaskHub.Modules.Tenancy.Application;
+using TaskHub.Modules.Tenancy.Infrastructure.DependencyInjection;
+using TaskHub.Modules.Tasks.Application;
+using TaskHub.Modules.Tasks.Infrastructure.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,14 +19,29 @@ builder.Services.AddControllers()
     .AddApplicationPart(
         typeof(TaskHub.Modules.Identity.API.Controllers.AuthController).Assembly)
     .AddApplicationPart(
-        typeof(TaskHub.Modules.Identity.API.Controllers.UsersController).Assembly);
+        typeof(TaskHub.Modules.Identity.API.Controllers.UsersController).Assembly)
+    .AddApplicationPart(
+        typeof(TaskHub.Modules.Tenancy.Api.Controllers.TenantsController).Assembly)
+    .AddApplicationPart(
+        typeof(TaskHub.Modules.Tasks.Api.Controllers.TasksController).Assembly);
+
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
 
 // Application
 builder.Services.AddIdentityApplication();
+builder.Services.AddTenancyApplication();
+builder.Services.AddTasksApplication();
 
 // Infrastructure
 builder.Services.AddIdentityInfrastructure(
     builder.Configuration);
+
+builder.Services.AddTenancyInfrastructure(
+    builder.Configuration);
+
+// لازم بعد AddTenancyInfrastructure (بيعتمد على ITenantConnectionStringResolver)
+builder.Services.AddTasksInfrastructure();
 
 builder.Services.AddEndpointsApiExplorer();
 
@@ -85,6 +106,10 @@ builder.Services
 
 var app = builder.Build();
 
+app.UseExceptionHandler();
+
+app.UseRouting();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -95,6 +120,8 @@ if (app.Environment.IsDevelopment())
 
 // Authentication must come before Authorization
 app.UseAuthentication();
+
+app.UseMiddleware<TenantResolutionMiddleware>();
 
 app.UseAuthorization();
 

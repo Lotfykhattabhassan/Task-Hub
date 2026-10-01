@@ -5,6 +5,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="../Application/TaskHub.BuildingBlocks.Application.csproj" />
     <ProjectReference Include="../Domain/TaskHub.BuildingBlocks.Domain.csproj" />
   </ItemGroup>

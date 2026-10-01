@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using TaskHub.Modules.Identity.Application.Commands.Login;
 using TaskHub.Modules.Identity.Application.Commands.Register;
 
@@ -15,6 +16,7 @@ namespace TaskHub.Modules.Identity.API.Controllers
             _sender = sender;
         }
 
+        [AllowAnonymous]
         [HttpPost("Register")]
         public async Task<IActionResult> Register([FromBody] RegisterCommand request, CancellationToken cancellationToken)
         {
@@ -23,6 +25,7 @@ namespace TaskHub.Modules.Identity.API.Controllers
             return Created($"/api/Identity/{user}",
         user);
         }
+        [AllowAnonymous]
         [HttpPost("Login")]
         public async Task<IActionResult> Login([FromBody] LoginCommand request, CancellationToken cancellationToken)
         {

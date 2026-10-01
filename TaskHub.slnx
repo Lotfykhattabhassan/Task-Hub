@@ -1,10 +1,9 @@
 <Solution>
   <Folder Name="/BuildingBlocks/">
-    <Project Path="src/BuildingBlocks/Domain/TaskHub.BuildingBlocks.Domain.csproj" />
     <Project Path="src/BuildingBlocks/Application/TaskHub.BuildingBlocks.Application.csproj" />
+    <Project Path="src/BuildingBlocks/Domain/TaskHub.BuildingBlocks.Domain.csproj" />
     <Project Path="src/BuildingBlocks/Infrastructure/TaskHub.BuildingBlocks.Infrastructure.csproj" />
   </Folder>
-  <Project Path="src/Host/TaskHub.Host.csproj" />
   <Folder Name="/Modules/" />
   <Folder Name="/Modules/Identity/">
     <Project Path="src/Modules/Identity/API/TaskHub.Modules.Identity.API.csproj" />
@@ -24,4 +23,5 @@
     <Project Path="src/Modules/Tasks/Domain/TaskHub.Modules.Tasks.Domain.csproj" />
     <Project Path="src/Modules/Tasks/Infrastructure/TaskHub.Modules.Tasks.Infrastructure.csproj" />
   </Folder>
+  <Project Path="src/Host/TaskHub.Host.csproj" />
 </Solution>

@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TaskHub.Modules.Identity.Application.Abstractions.Identity;
-using TaskHub.Modules.Identity.Application.Exceptions;
 using TaskHub.Modules.Identity.Domain.Entities;
-using TaskHub.Modules.Identity.Domain.Exceptions;
 using TaskHub.Modules.Identity.Domain.ValueObjects;
 using TaskHub.Modules.Identity.Infrastructure.Persistence;
 

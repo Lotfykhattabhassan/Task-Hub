@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using TaskHub.BuildingBlocks.Application.MultiTenancy;
 using TaskHub.Modules.Identity.Application.Queries.GetCurrentUser;
 
 namespace TaskHub.Modules.Identity.API.Controllers
@@ -16,7 +17,7 @@ namespace TaskHub.Modules.Identity.API.Controllers
             _sender = sender;
         }
         [Authorize]
-
+        [SkipTenantResolution]
         [HttpGet("me")]
         public async Task<IActionResult> Get(CancellationToken cancellationToken)
         {

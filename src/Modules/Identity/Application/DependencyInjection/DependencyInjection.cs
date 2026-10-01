@@ -1,6 +1,6 @@
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
-using TaskHub.Modules.Identity.Application.Behaviors;
+using TaskHub.BuildingBlocks.Application.Behaviors;
 
 namespace TaskHub.Modules.Identity.Application.DependencyInjection;
 
